@@ -5,7 +5,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState([]);
   
-  const socket = useMemo(() => io('http://localhost:5000', 
+  const socket = useMemo(() => io('https://meet-web-8wo9.onrender.com', 
     { autoConnect: false }), []);
   
   useEffect(() => {
