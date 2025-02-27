@@ -14,7 +14,7 @@ const app = express();
 const server = createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: ["process.env.CLIENT_URL"],
+    origin: [process.env.CLIENT_URL],
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["process.env.CLIENT_URL", "http://localhost:3000"],
+    origin: [process.env.CLIENT_URL],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
