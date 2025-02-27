@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 
-const sessionSchema = new mongoose.Schema({
-    users: [{ type: String }], 
-    createdAt: { type: Date, default: Date.now},
-  });
-  
-  const Session = mongoose.model("Session", sessionSchema);
+const sessionSchema = new mongoose.Schema(
+  {
+    users: [String], 
+    pairs: {
+      type: [[String]], 
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
 
-    export default Session;
-  
+export default mongoose.model("Session", sessionSchema);
