@@ -48,10 +48,10 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT,() => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-}
-);
+// app.listen(process.env.PORT,() => {
+//   console.log(`Server is running on port ${process.env.PORT}`);
+// }
+// );
 
 server.listen(process.env.CHAT_PORT, () => {
   console.log(`Chat Server is running on port ${process.env.CHAT_PORT}`);
