@@ -41,6 +41,13 @@ connectDB();
 // Routes
 app.use("/auth", authRoutes);
 
+app.get("/", (req, res) => {
+  return res.json({
+    success: true,
+    message: "Your server is up and running",
+  });
+});
+
 app.listen(process.env.PORT,() => {
   console.log(`Server is running on port ${process.env.PORT}`);
 }
