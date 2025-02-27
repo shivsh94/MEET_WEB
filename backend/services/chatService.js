@@ -23,7 +23,7 @@ export default function socketHandler(io) {
 
         await Session.findOneAndUpdate(
           { _id: session._id },
-          { $push: { pairs: [UserId, pairedUser] } } // Push pair as an array
+          { $push: { pairs: [UserId, pairedUser] } } 
         );
 
         io.to(UserId).emit("paired", pairedUser);

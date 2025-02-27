@@ -23,8 +23,7 @@ export const io = new Server(server, {
 
 
 socketHandler(io);
-  
-// Middleware
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -53,7 +52,7 @@ app.get("/", (req, res) => {
 // }
 // );
 
-server.listen(process.env.CHAT_PORT, () => {
-  console.log(`Chat Server is running on port ${process.env.CHAT_PORT}`);
+server.listen(process.env.PORT, () => {
+  console.log(`Chat Server is running on port ${process.env.PORT}`);
 });
 
