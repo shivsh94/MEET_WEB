@@ -4,12 +4,13 @@ export default function socketHandler(io) {
   // Function to update and broadcast user count
   const updateUserCount = async () => {
     try {
-      const session = await Session.findOne();
-      if (session) {
-        const onlineUserCount = session.users.length;
-        io.emit("userCount", { count: onlineUserCount });
-        console.log(`Broadcasting user count: ${onlineUserCount}`);
-      }
+      const result = await Session.aggregate([
+        { $project: { userCount: { $size: "$users" } } }
+      ]);
+      
+      const count = result[0]?.userCount || 0;
+      io.emit("userCount", { count });
+      console.log(`Broadcasting user count: ${count}`);
     } catch (error) {
       console.error("Error updating user count:", error);
     }
