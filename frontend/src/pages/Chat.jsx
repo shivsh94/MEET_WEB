@@ -7,10 +7,10 @@ const Chat = () => {
   const [status, setStatus] = useState("Connecting...");
   const [pairedUserId, setPairedUserId] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState(0); // New state for online users count
 
   const socket = useMemo(() => io(import.meta.env.VITE_SOCKET_SERVER, 
     { autoConnect: false }), []);
-
 
   useEffect(() => {
     socket.connect();
@@ -42,7 +42,6 @@ const Chat = () => {
       console.log("Paired with:", data);
       setPairedUserId(data.userId);
       setStatus(`You are now chatting with a partner`);
-      // Clear previous messages when paired with new user
       setReceivedMessages([]);
     });
 
@@ -58,6 +57,12 @@ const Chat = () => {
       setStatus("Disconnected from server");
     });
 
+    // New listener for user count updates
+    socket.on('userCount', (data) => {
+      console.log("User count update:", data);
+      setOnlineUsers(data.count);
+    });
+
     return () => {
       socket.disconnect();
     };
@@ -66,7 +71,6 @@ const Chat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message.trim() === "") return;
-
     
     setReceivedMessages((prevMessages) => [
       ...prevMessages, 
@@ -86,8 +90,13 @@ const Chat = () => {
           <div className={`inline-block w-3 h-3 rounded-full mr-2 ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
           {status}
         </div>
+        {/* Display online users count */}
+        <div className="text-center text-gray-300 mt-2">
+          <span className="bg-blue-500 text-white px-2 py-1 rounded text-sm font-semibold">
+            {onlineUsers} {onlineUsers === 1 ? "user" : "users"} online
+          </span>
+        </div>
       </div>
-      
       
       <div className="flex-grow overflow-y-auto p-4">
         <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg p-4 h-full overflow-y-auto">
@@ -95,7 +104,7 @@ const Chat = () => {
             {pairedUserId ? "Chat Active" : "Waiting for partner..."}
           </h2>
           
-          <div className="space-y-3">
+          <div className="space-y-3 bottom-0 ">
             {receivedMessages.length === 0 ? (
               <p className="text-gray-500 text-center italic py-8">
                 {pairedUserId 
@@ -121,7 +130,6 @@ const Chat = () => {
         </div>
       </div>
       
-      {/* Message Input Area */}
       <div className="bg-gray-800 p-4 shadow-lg">
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto flex items-end gap-2">
           <div className="flex-grow">
