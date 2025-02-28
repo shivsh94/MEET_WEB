@@ -19,9 +19,9 @@ const Navbar = () => {
   return (
     <>
       <div className='fixed top-10 right-10'>
-        <button>
+        {/* <button>
           <GoogleAuth onLoginSuccess={handleLoginSuccess} />
-        </button>
+        </button> */}
       </div>
       <div className="fixed bottom-0 left-0 right-0 pb-4 px-2 z-50">
         <nav className="max-w-lg mx-auto rounded-full bg-gradient-to-r from-[rgb(26,54,54)] to-gray-800 shadow-lg p-2">

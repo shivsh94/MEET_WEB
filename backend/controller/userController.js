@@ -12,9 +12,9 @@ export const googleAuth = async (req, res) => {
     }
 
     // Verify token with Google
-    const googleRes = await axios.get(
-      `https://oauth2.googleapis.com/tokeninfo?id_token=${token}`
-    );
+    // const googleRes = await axios.get(
+    //   `https://oauth2.googleapis.com/tokeninfo?id_token=${token}`
+    // );
     // console.log("googleRes :",googleRes);
     
     const { sub, name, email, picture } = googleRes.data;

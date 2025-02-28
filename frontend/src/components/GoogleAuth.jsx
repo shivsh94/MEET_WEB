@@ -32,11 +32,11 @@ const GoogleAuth = ({ onLoginSuccess }) => {
             setIsLoading(true);
             setError(null);
             
-            const response = await axios.post(
-                "http://localhost:3000/auth/google",
-                { token: credentialResponse.credential },
-                { withCredentials: true }
-            );
+            // const response = await axios.post(
+            //     "http://localhost:3000/auth/google",
+            //     { token: credentialResponse.credential },
+            //     { withCredentials: true }
+            // );
             
             // const userData = {
             //     ...response.data.user,

@@ -4,7 +4,7 @@ const initialState = {
     rooms: [],
     currentRoom: null,
 };
-console.log("initialState",initialState.rooms);
+// console.log("initialState",initialState.rooms);
 
 export const roomSlice = createSlice({
     name: "room",
